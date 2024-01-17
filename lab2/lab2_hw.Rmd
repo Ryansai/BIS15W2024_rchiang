@@ -70,7 +70,7 @@ spring_data_matrix_with_avgs
 
 8. Show Susan's value for Opal Spring only.
 
-```{r}
+```{r} 
 spring_data_matrix_with_avgs[2,3]
 ```
 
