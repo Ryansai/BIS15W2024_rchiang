@@ -3,10 +3,10 @@ title: "Lab 2 Homework"
 author: "Ryan Chiang"
 date: "`r Sys.Date()`"
 output:
-  pdf_document:
-    toc: false
   html_document:
     theme: spacelab
+    toc: false
+  pdf_document:
     toc: false
 ---
 
