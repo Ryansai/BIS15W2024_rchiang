@@ -33,8 +33,9 @@ R allows us to import a wide variety of data types. The most common type of file
 An opinionated word about excel. It is fine to use excel for data entry and basic analysis. But, it often adds formatting that makes excel files difficult to work with in any program besides excel. R can read excel files, but I know of no R programmers that routinely use them. Instead they save copies of their excel files as .csv which strips away formatting but makes them easier to use in a variety of programs. We won't work with excel files in BIS 15L, but we will learn to import them.  
 
 To import any file, first make sure that you are in the correct working directory. If you are not in the correct directory, R will not "see" the file.
+### dont import excel in R
 ```{r}
-
+getwd()
 ```
 
 ## Load the data
@@ -42,39 +43,42 @@ Here we open a .csv file. Since we are using the tidyverse, we open the file usi
 
 In the previous part of the lab, you exported a `.csv` of hot springs data. Let's try to reload that `.csv`.  
 ```{r}
-
+hot_springs <- read_csv("hsprings_data.csv")
 ```
 
 Use the `str()` function to get an idea of the data structure of `hot_springs`.  
 ```{r}
-
+str(hot_springs)
 ```
 
 What is the class of the scientist column? Change it to factor and then show the levels of that factor.  
 ```{r}
-
+class(hot_springs$scientist)
 ```
 
 ```{r}
-
+hot_springs$scientist <- as.factor(hot_springs$scientist)
 ```
-
+### factor has discrete values/ can be repeated multiple times
+### character is any string of number, factor is repeated string of number
 ```{r}
-
+levels(hot_springs$scientist)
 ```
-
+### levels tells us number of factor 
 ## Practice
 1. In your lab 3 folder there is another folder titled `data`. Inside the `data` folder there is a `.csv` titled `Gaeta_etal_CLC_data.csv`. Open this data and store them as an object called `fish`.  
 
 The data are from: Gaeta J., G. Sass, S. Carpenter. 2012. Biocomplexity at North Temperate Lakes LTER: Coordinated Field Studies: Large Mouth Bass Growth 2006. Environmental Data Initiative.  [link](https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-ntl&identifier=267)  
 ```{r}
-
+fish <- read_csv("data/Gaeta_etal_CLC_data.csv")
 ```
-
+### ^ this opens up the data, you need tha "data/" to tell you where it is, it will not open if not included
 2. What is the structure of these data?
 ```{r}
-
+str(fish)
 ```
+```{r}
+
 
 ```{r}
 
@@ -87,102 +91,103 @@ Once data have been uploaded, you may want to get an idea of its structure, cont
 
 We can summarize our data frame with the`summary()` function.  
 ```{r}
-
+summary(fish)
 ```
-
+### summary gives you basic stats
 `glimpse()` is another useful summary function.
 ```{r}
 
 ```
-
+### glimpse also tells you a summary, is good bc ledford does not trust stats given by summary
 `nrow()` gives the numbers of rows.
 ```{r}
-
+nrow(fish)
 ```
 
 `ncol` gives the number of columns.
 ```{r}
-
+ncol(fish)
 ```
 
 `dim()` gives the dimensions.
 ```{r}
-
+dim(fish)
 ```
 
 `names` gives the column names.
 ```{r}
-
+names(fish)
 ```
 
 `head()` prints the first n rows of the data frame.
 ```{r}
-
+head(fish)
 ```
-
+### head gives first part of data
 `tail()` prinst the last n rows of the data frame.
 ```{r}
-
+tail(fish)
 ```
-
+### tail gives last part of data
 `table()` is useful when you have a limited number of categorical variables. It produces fast counts of the number of observations in a variable. We will come back to this later... 
 ```{r}
-
+table(fish$lakeid)
 ```
 
 We can also click on the `fish` data frame in the Environment tab or type View(fish).
 ```{r}
-#View(fish)
+View(fish)
 ```
 
 ## Filter
 Filter is a way of pulling out observations that meet specific criteria in a variable. We will work a lot more with this in the next lab.  
 ```{r}
-
+little_fish <- filter(fish, length<=100)
+little_fish
 ```
-
+### filter pulls out only certian data, <= is less than or equal to
 ## Practice
 1. Load the data `mammal_lifehistories_v2.csv` and place it into a new object called `mammals`.
 ```{r}
-
+mammals <- read_csv("data/mammal_lifehistories_v2.csv")
 ```
 
 2. Provide the dimensions of the data frame.
 ```{r}
-
+dim(mammals)
 ```
 
 3. Check the column names in the data frame. 
 ```{r}
-
+colnames(mammals)
 ```
 
 4. Use `str()` to show the structure of the data frame and its individual columns; compare this to `glimpse()`. 
 ```{r}
-
+str(mammals)
 ```
 
 ```{r}
-
+glimpse(mammals)
 ```
 
 5. . Try the `table()` command to produce counts of mammal order, family, and genus.  
 ```{r}
-
+table(mammals$order)
 ```
 
 ```{r}
-
+table(mammals$family)
 ```
 
 ```{r}
-
+table(mammals$Genus)
 ```
 
 ```{r}
-
+msleep <- msleep
 ```
-
+### ^ makes us able to use msleep
 ## Wrap-up
 Please review the learning goals and be sure to use the code here as a reference when completing the homework.  
 -->[Home](https://jmledford3115.github.io/datascibiol/)
