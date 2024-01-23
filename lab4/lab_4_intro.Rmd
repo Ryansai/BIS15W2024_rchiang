@@ -22,9 +22,10 @@ library("jpeg")
 ## Review from last time
 ### *With a partner, discuss the following questions*
 1. What is a data frame and how is it different than a data matrix?  
-2. What is the command we use to import .csv files into R?  
+2. What is the command we use to import .csv files into R? 
+### readcsv is the command
 3. Take a moment to show your repository on GitHub to a partner. Can you make any improvements?  
-
+# Remember to check for updates on personal laptop
 ## Warm-up
 1. In a new R Markdown document, load the tidyverse and a package called `palmerpenguins`.
 2. What are the dimensions of the dataset `penguins`?

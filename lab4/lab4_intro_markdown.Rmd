@@ -1,0 +1,42 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+install.packages("palmerpenguins")
+library(palmerpenguins)
+```
+
+```{r}
+library("tidyverse")
+```
+```{r}
+matrix(penguins)
+```
+```{r}
+dim(penguins)
+```
+### dimensions are 344 by 8
+```{r}
+names(penguins)
+```
+```{r}
+penguins <- penguins
+```
+
+```{r}
+table(penguins$island)
+```
+```{r}
+penguins$island
+```
+```{r}
+summary(penguins$island)
+```
+
+### 344 penguins sampled
+```{r}
+mean(penguins$body_mass_g, na.rm=T)
+```
+

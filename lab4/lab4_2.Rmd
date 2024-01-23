@@ -43,17 +43,20 @@ Unlike `select()`, `filter()` allows us to extract data that meet specific crite
 ```{r}
 filter(fish, lakeid == "AL")
 ```
-
+### note use two equal signs, use quotes 
 Similarly, if we are only interested in fish with a length greater than or equal to 350 we can use `filter()` to extract these observations.  
 ```{r}
 filter(fish, length >= 350)
 ```
-
+### no quotes bc 350 is a number ^
 + `filter()` allows all of the expected operators; i.e. >, >=, <, <=, != (not equal), and == (equal).  
 
 Using the `!` operator allows for the exclusion of specific observations.
 ```{r}
-filter(fish, lakeid != "AL")
+filter(fish, lakeid != "AL") ### ! means not
+```
+```{r}
+not_al <- filter(fish, lakeid != "AL")
 ```
 
 ## Using `filter()` with multiple observations  
@@ -61,7 +64,7 @@ Filtering multiple values within the same variable requires the `%in%` [operator
 ```{r}
 filter(fish, length %in% c(167, 175))
 ```
-
+# %in% stands for interval 
 Alternatively, you can use `between` if you are looking for a range of specific values.  
 ```{r}
 filter(fish, between(scalelength, 2.5, 2.55))
@@ -75,7 +78,7 @@ filter(fish, near(radii_length_mm, 2, tol = 0.2))
 ## Practice
 1. Filter the `fish` data to include the samples from lake "BO".
 ```{r}
-
+filter(fish, lake_id == BO)
 ```
 
 2. Filter the data to include all lakes except "AR".
