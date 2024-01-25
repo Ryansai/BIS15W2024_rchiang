@@ -18,6 +18,7 @@ output:
 ## Load the tidyverse
 ```{r message=FALSE, warning=FALSE}
 library("tidyverse")
+library(janitor)
 ```
 
 ## Load the data
@@ -40,7 +41,7 @@ mammals <- rename(mammals, genus="Genus", wean_mass="wean mass", max_life= "max.
 
 Do you remember the easier way?
 ```{r}
-
+mammals <- clean_names(mammals)
 ```
 
 ## Review
@@ -57,7 +58,7 @@ levels(fish$lakeid)
 
 Now we can pull out any state of interest.  
 ```{r}
-
+filter(fish, lakeid=="LJ")
 ```
 
 ## Using `filter()` on multiple conditions
@@ -85,18 +86,21 @@ filter(fish, length > 400, (scalelength > 11 | radii_length_mm > 8))
 ## Practice  
 1.  From the `mammals` data, filter all members of the family Bovidae with a mass greater than 450000.
 ```{r}
-
+bovidae_big <- filter(mammals, family == "Bovidae" & mass >= 45000)
 ```
 
 2. From the `mammals` data, build a data frame that compares `mass`, `gestation`, and `newborn` among the primate genera `Lophocebus`, `Erythrocebus`, and `Macaca`. Among these genera, which species has the smallest `newborn` mass?
 ```{r}
+monkey <- filter(mammals, genus == "Lophocebus"| genus == "Erythrocebus"| genus == "Macaca")
+monkey_features <- select(monkey, mass, gestation, newborn)
 
 ```
 
 ```{r}
-
+order(monkey_features$newborn)
+monkey
 ```
-
+### Macaca maura
 ## That's it! Let's take a break and then move on to part 2!  
 
 -->[Home](https://jmledford3115.github.io/datascibiol/)  
