@@ -7,6 +7,7 @@ output: ioslides_presentation
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library("jpeg")
+library(tidyverse)
 ```
 
 ## Setup
@@ -27,8 +28,53 @@ library("jpeg")
 
 ## Warm-up
 1. Load the `bison.csv` data.
+```{r}
+bison <- read.csv('data/bison.csv')
+```
+
 2. What are the dimesions and structure of the data?
+
+```{r}
+dim(bison)
+```
+
 3. We are only interested in code, sex, weight, year of birth. Restrict the data to these variables and store the dataframe as a new object.
+```{r}
+bison_animal_details <- select(bison, "animal_sex", "animal_code", "animal_weight", "animal_yob")
+```
+
+
 4. Pull out the animals born between 1980-1990.
+bison filter
+
+```{r}
+new_bison <- bison %>%
+filter(animal_yob >= 1980) %>% 
+filter(animal_yob <= 1990) %>% 
+arrange(animal_yob)
+```
+ 
+
 5. How many male and female bison are represented between 1980-1990?
+
+```{r}
+males <- filter(new_bison, animal_sex == "M")
+females <- filter(new_bison, animal_sex == "F")
+
+glimpse(males)
+
+```
+```{r}
+glimpse(females)
+```
+
 6. Between 1980-1990, were males or females larger on average?
+
+```{r}
+mean(males$animal_weight)
+```
+
+```{r}
+mean(females$animal_weight)
+```
+
