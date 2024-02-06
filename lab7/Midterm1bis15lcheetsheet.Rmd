@@ -65,3 +65,23 @@ fisheries %>%
   select(country,isscaap_group_number, asfis_species_number, asfis_species_name, contains("1"))
 ```
 ### ^ when using select you can use contains() or starts_with/ends_with() to narrow
+
+
+```{r}
+fisheries_tidy %>% 
+  filter(year == "2012") %>% 
+  filter(country == "Estonia") %>% 
+  group_by(asfis_species_name) %>% 
+  summarise(most_popular_fish_estonia = sum(catch, na.rm = TRUE)) %>% 
+  arrange(desc(most_popular_fish_estonia))
+
+```
+### ^ for pulling out data specific details and complicated
+
+`count()` is an easy way of determining how many observations you have within a column. It acts like a combination of `group_by()` and `n()`.
+```{r}
+penguins %>% 
+  count(island, sort = T) #sort=T sorts the column in descending order
+```
+
+
