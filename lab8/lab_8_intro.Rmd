@@ -9,6 +9,10 @@ knitr::opts_chunk$set(echo = FALSE)
 library("jpeg")
 ```
 
+```{r}
+install.packages("naniar")
+```
+
 ## Setup
 1. Go to iclicker.com and record your attendance.
 2. Login to the lab computer (please don't use your personal computer).  
@@ -22,8 +26,11 @@ library("jpeg")
 ## Feedback
 ### *On the inside of your name tent, please answer the following:*
 1. How did the midterm go? Did you learn anything while doing the exam?
+### The midterm went well, I learned the command n_distinct
 2. Where did you get stuck?
+### when I had to use n_distinct
 3. What do we need to practice?
+### n_distinct and mutate
 
 ### Warm-up
 1. Please install the package `naniar`.
