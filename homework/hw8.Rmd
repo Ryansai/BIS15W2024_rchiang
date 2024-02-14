@@ -1,11 +1,11 @@
 ---
 title: "Homework 8"
-author: "Please Add Your Name Here"
+author: "Ryan Chiang"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
@@ -42,12 +42,12 @@ sydneybeaches %>%
 
 If you want to try `here`, first notice the output when you load the `here` library. It gives you information on the current working directory. You can then use it to easily and intuitively load files.
 ```{r}
-library(here)
+library("here")
 ```
 
 The quotes show the folder structure from the root directory.
 ```{r}
-sydneybeaches <-read_csv(here("lab9", "data", "sydneybeaches.csv")) %>% clean_names()
+sydneybeaches <-read_csv(here("lab9/data/sydneybeaches.csv")) %>% clean_names()
 ```
 
 2. Are these data "tidy" per the definitions of the tidyverse? How do you know? Are they in wide or long format?
@@ -88,17 +88,30 @@ sydneybeaches_long %>%
 
 7. What is the average `enterococci_cfu_100ml` by year for each beach. Think about which data you will use- long or wide.
 ```{r}
-sydneybeaches_long %>% 
+mean_ent_by_year_and_site_frame <- sydneybeaches_long %>% 
   separate(date, into = c("day", "month", "year"), sep = "/") %>% 
-group_by(year, site) %>% 
-summarise(meanbeach <- mean(enterococci_cfu))
+group_by(site, year) %>% 
+summarise(meanent = mean(enterococci_cfu_100ml, na.rm = TRUE))
 
  
 ```
 
 8. Make the output from question 7 easier to read by pivoting it to wide format.
+```{r}
+wide_mean_ent_by_year_and_site_frame <- mean_ent_by_year_and_site_frame %>% 
+  pivot_wider(values_from = meanent,
+                names_from = year)
+wide_mean_ent_by_year_and_site_frame
+```
 
 9. What was the most polluted beach in 2013?
+
+```{r}
+mean_ent_by_year_and_site_frame %>% 
+  filter(year == "2013") %>% 
+  arrange(desc(meanent))
+
+```
 
 10. Please complete the class project survey at: [BIS 15L Group Project](https://forms.gle/H2j69Z3ZtbLH3efW6)
 
