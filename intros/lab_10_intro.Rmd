@@ -17,6 +17,23 @@ library("jpeg")
 
 ## Warm-up
 1. In the data folder there is an epidemiology data set on an outbreak of malaria.  
+```{r}
+malaria <- read.csv("../lab10/data/malaria.csv") %>%  clean_names()
+```
+
 2. `rdt` refers to rapid diagnostic test and they are identified here by age group.  
-3. Make the data tidy and store them as a new object.   
+```{r}
+head(malaria)
+```
+
+### not tidy because title names include data 
+3. Make the data tidy and store them as a new object. 
+```{r}
+malaria %>% 
+filter(data_date == "2020-07-30") %>% 
+  group_by(district) %>% 
+  summarise(tot_cases=sum(cases, na.rm = T)) %>% 
+  arrange(-tot_cases)
+```
+
 4. Which district had the highest *total* number of cases on July 30, 2020?  
