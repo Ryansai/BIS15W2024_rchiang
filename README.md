@@ -3,3 +3,4 @@
 ### Ryan Chiang UC Davis
 ### This is where progress for the course, projects, and classwork will be stored
 ### rschiang@ucdavis.edu
+### My completed homework will be in my homework file
