@@ -88,6 +88,20 @@ deserts %>%
 ```
 
 9. Which two species have, on average, the highest weight? Once you have identified them, make a new column that is a ratio of `weight` to `hindfoot_length`. Make a plot that shows the range of this new ratio and fill by sex.
+```{r}
+deserts %>% 
+  group_by(species_id) %>% 
+  summarise(meanweight = mean(weight, na.rm = T)) %>% 
+  arrange(desc(meanweight))
+deserts %>% 
+  mutate(weightohindfoot = weight/hindfoot_length) %>% 
+  ggplot(aes(weightohindfoot)) + geom_boxplot(na.rm = T)
+```
+
+```{r}
+
+```
+
 
 10. Make one plot of your choice! Make sure to include at least two of the aesthetics options you have learned.
 
