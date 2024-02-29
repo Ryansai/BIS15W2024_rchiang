@@ -53,7 +53,9 @@ spider_list[[3]]
 ## Practice
 1. Getting an idea of the structure of lists is a bit tricky, especially when there are many elements. Try exploring the elements in `spider_list` using names(), str(), or glimpse(). For names(), you will need to specify an element using [[]].  
 ```{r}
-
+spider_list[[3]] %>% 
+  glimpse()
+names(spider_list[[3]])### must use double brackets
 ```
 
 ## Naming List Elements
@@ -84,7 +86,7 @@ names(spider_list)
 ## Practice
 1. Now that our list elements are named, how could we access the Butte County data by name?
 ```{r}
-
+spider_list[["Butte"]]
 ```
 
 ## Merging Files
@@ -161,7 +163,8 @@ We will use a join here to merge lat/long to our data frame. Both files contain 
 ## Practice
 1. Which type of join is most appropriate in this case?  
 ```{r}
-
+spiders_with_locs <- left_join(spiders_all, spiders_locs, by="Accession")
+spiders_with_locs
 ```
 
 As a side note, joining data can highlight problems or typos with the data when the join does not go as expected.  
@@ -207,29 +210,29 @@ dateformat5 <- "20200922 170000"
 ## Practice 
 1. Convert each of the examples above using lubridate.
 ```{r}
-
+ymd(dateformat1)
 ```
 
 ```{r}
-
+mdy(dateformat2)
 ```
 
 ```{r}
-
+dmy(dateformat3)
 ```
 
 ```{r}
-
+mdy_hms(dateformat4)
 ```
 
 ```{r}
-
+ymd_hms(dateformat5)
 ```
 
 ## Export for part 2  
 We need to save our final data to a `.csv` so we can use it in part 2. 
 ```{r}
-#write.csv(spiders_with_locs, file = "spiders_with_locs.csv", row.names = FALSE)
+write.csv(spiders_with_locs, file = "spiders_with_locs.csv", row.names = FALSE)
 ```
 
 ## That's it, let's take a break!   
