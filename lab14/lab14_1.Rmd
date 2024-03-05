@@ -100,12 +100,13 @@ ui <- fluidPage(
   
     selectInput("x", "Select X Variable", choices = c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g"), selected = "bill_length_mm"),
     
-
-    
+selectInput("x", "Select Y Variable", choices = c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g"), selected = "bill_length_mm")
+    plotOutput("plot", width="500px", height="400px")
 )
 
 server <- function(input, output) {
-  
+  output$plot <- renderplot({
+    ggplot(data = penguins, aes_string(x=inputs$x, y=input$y, color="species")) + geom_point() + theme_light(bases_size=18) } 
 }
 
 shinyApp(ui, server)
@@ -180,7 +181,21 @@ homerange <- read_csv("data/Tamburelloetal_HomeRangeDatabase.csv")
 ```
 
 ```{r}
+library(shiny)
 
+ui<- fluidPage(
+  
+  radioButtons("x", "Select Fill Variable", choices = c("trophic.guild", "thermoregulation"), selected = "trophic.guild"),
+  
+  plotOutput("plot")
+)
+
+server <- function(input,output, session) {output$plot <- renderPlot({
+  
+  ggplot(data=homerange,aes_string(x="locomotion", fill=input$x)) + geom_bar(position = "dodge", alpha = .8, color="black")
+})}
+
+shinyApp(ui, server)
 ```
 
 ```{r}
